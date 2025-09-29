@@ -35,11 +35,7 @@ updatePartProp<
 }
 
   // reset single part
-  resetPart(part: Part) {
-    if (part === "frame") this.frame = { ...DEFAULTS.frame };
-    if (part === "lens") this.lens = { ...DEFAULTS.lenses };
-    if (part === "temple") this.temple = { ...DEFAULTS.temple };
-  }
+ 
 
   // reset everything
   resetAll() {

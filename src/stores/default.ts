@@ -9,7 +9,7 @@ export const DEFAULTS: {
 } = {
   frame: {
     color: "#111827",
-    texture: "none",
+    texture: "./texture/original.jpg",
     metalness: 0.4,
     roughness: 0.6,
     transparency: 0,
@@ -20,7 +20,7 @@ export const DEFAULTS: {
   },
   temple: {
      color: "#111827",
-    texture: "none",
+    texture: "./texture/original.jpg",
     metalness: 0.4,
     roughness: 0.6,
     transparency: 0,
