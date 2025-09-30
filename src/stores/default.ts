@@ -8,21 +8,21 @@ export const DEFAULTS: {
   ui: UiProps;
 } = {
   frame: {
-    color: "#111827",
-    texture: "./texture/original.jpg",
-    metalness: 0.4,
-    roughness: 0.6,
+    color: "#ffffff",
+    texture: "/texture/original.jpg",
+    metalness: 0.2,
+    roughness: 0.1,
     transparency: 0,
   },
   lenses: {
-    color: "#1f2937",
-    transparency: 0.5,
+    color: "#ffffff",
+    transparency: 0.8,
   },
   temple: {
-     color: "#111827",
-    texture: "./texture/original.jpg",
-    metalness: 0.4,
-    roughness: 0.6,
+     color: "#ffffff",
+    texture: "/texture/original.jpg",
+    metalness: 0.1,
+    roughness: 0.2,
     transparency: 0,
   },
   ui: {

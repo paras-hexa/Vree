@@ -35,7 +35,7 @@ export default function ModelViewer() {
   const dirRef = useRef();
 
   return (
-    <div className="flex-1">
+    <div className="flex-1 ">
       <Canvas
         shadows
         camera={{ position: [0, 1.4, 3.5], fov: 50 }}
@@ -77,7 +77,10 @@ export default function ModelViewer() {
         <ShadowPlane size={3.2} y={-0.4} opacity={0.2} />
 
         {/* Environment for reflections */}
-        <Environment preset="sunset" />
+       <Environment
+      files="./environment/brown_photostudio_02_1k.hdr"
+  
+    />
       </Canvas>
     </div>
   );

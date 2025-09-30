@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../stores/StoreContext";
 const COLOR_IMAGES = [
@@ -13,7 +12,7 @@ const COLOR_IMAGES = [
 ];
 
 const TEXTURE_IMAGES = [
-   "/texture/original.jpg",
+    "/texture/original.jpg",
     "/texture/texture1.png",
     "/texture/texture2.jpg",
     "/texture/texture3.jpg",
@@ -70,8 +69,8 @@ function PointSlider({
                             key={i}
                             onClick={() => onChange(parseFloat(val.toFixed(2)))}
                             className={`absolute -top-3 transform -translate-x-1/2 w-4 h-4 rounded-full border-2 transition-all duration-200 ${isActive
-                                    ? "bg-white border-purple-700 shadow-md pointer-events-auto"
-                                    : "bg-gray-200 dark:bg-gray-600 border-gray-300 pointer-events-auto"
+                                ? "bg-white border-purple-700 shadow-md pointer-events-auto"
+                                : "bg-gray-200 dark:bg-gray-600 border-gray-300 pointer-events-auto"
                                 }`}
                             style={{ left: leftPct }}
                             aria-label={`set ${val.toFixed(2)}`}
@@ -107,11 +106,11 @@ function PointSlider({
 const Sidebar: React.FC = observer(() => {
     const store = useStore();
     const current = getPartFromStore(store) ?? {};
-   
-    console.log(store);
-    
 
-    const selectTexture = (t: string) => store.updatePartProp(store.selectedPart, "texture", t);
+    console.log(store);
+
+
+    const selectTexture = (t: string) => store.updatePartProp(store.selectedPart, 'texture', t);
     const selectColor = (c: string) => store.updatePartProp(store.selectedPart, "color", c);
     const updateNumeric = (k: string, v: number) => store.updatePartProp(store.selectedPart, k, v);
 
@@ -123,28 +122,28 @@ const Sidebar: React.FC = observer(() => {
             className={`
         basis-full lg:basis-2/5
         max-h-[calc(100vh-4rem)]
-        my-6 lg:my-8
+        mb-10 lg:my-8
         overflow-y-auto
-       
         p-6 lg:p-8
         rounded-lg lg:rounded-none
         flex flex-col
+        w-full lg:w-2/5 lg:max-w-[450px] overflow-auto
       `}
-      style={{backgroundImage: isDark ? "url('./background/sidebarbg.png')" : "url('./background/whitebg.jpg')" , backgroundSize:"cover" , backgroundRepeat:"no-repeat"}}
+            style={{ backgroundImage: isDark ? "url('./background/sidebarbg.png')" : "url('./background/whitebg.jpg')", backgroundSize: "cover", backgroundRepeat: "no-repeat" }}
         >
             {/* Tabs */}
             <div className="flex gap-3 mb-6">
                 {PARTS.map((p) => {
                     const active =
                         store.selectedPart === p.key ||
-                        (p.key === "lens" && (store.selectedPart === "lenses" || store.selectedPart === "lens"));
+                        (p.key === "lens" && store.selectedPart === "lens");
                     return (
                         <button
                             key={p.key}
                             onClick={() => store.selectPart(p.key as any)}
                             className={`flex-1 px-4 py-2 rounded-lg font-semibold transition-shadow duration-200 ${active
-                                    ? "bg-gradient-to-r from-purple-700 to-pink-500 text-white shadow-lg"
-                                    : "bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
+                                ? "bg-gradient-to-r from-purple-700 to-pink-500 text-white shadow-lg"
+                                : "bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
                                 }`}
                         >
                             {p.label}
@@ -154,15 +153,15 @@ const Sidebar: React.FC = observer(() => {
             </div>
 
             {/* Texture */}
-     {       (store.selectedPart === "frame" || store.selectedPart === "temple") && (
+            {(store.selectedPart === "frame" || store.selectedPart === "temple") && (
                 <div className="mb-6">
                     <h3 className="text-sm font-semibold mb-3 text-gray-900 dark:text-gray-200">Texture</h3>
                     <div className="flex gap-4 items-center">
                         <button
                             onClick={() => selectTexture(null)}
-                            className={`w-14 h-14 flex items-center justify-center rounded-lg cursor-pointer transition-shadow ${current.texture === "none"
-                                    ? "ring-2 ring-purple-600 bg-gradient-to-r from-purple-700 to-pink-500 text-white shadow-lg"
-                                    : "border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
+                            className={`w-14 h-14 flex items-center justify-center rounded-lg cursor-pointer transition-shadow ${current.texture === null
+                                ? "ring-2 ring-purple-600 bg-gradient-to-r from-purple-700 to-pink-500 text-white shadow-lg"
+                                : "border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
                                 }`}
                             title="No texture"
                         >
@@ -170,8 +169,12 @@ const Sidebar: React.FC = observer(() => {
                         </button>
 
                         {TEXTURE_IMAGES.map((t) => {
-                       
-                          const active = current.texture === t;
+
+                            const active = current.texture === "/texture/original.jpg"
+                                ?  t === "/texture/original.jpg"
+                                : current.texture === t;
+                            console.log(current.texture , t);
+                            
                             return (
                                 <button
                                     key={t}
@@ -186,13 +189,14 @@ const Sidebar: React.FC = observer(() => {
                         })}
                     </div>
                 </div>
-            ) }
+            )}
             {/* Colors */}
             <div className="mb-6">
                 <h3 className="text-sm font-semibold mb-3 text-gray-900 dark:text-gray-200">Color</h3>
                 <div className="flex gap-4 flex-wrap items-center">
                     {COLOR_IMAGES.map((c) => {
-                        const active = current.color === c;
+                        const active = current.color === "#ffffff" ? c.value === '#ffffff' : current.color===c.value;
+                     
                         return (
                             <button
                                 key={c.value}
@@ -210,13 +214,13 @@ const Sidebar: React.FC = observer(() => {
                     <div className="flex items-center gap-3 ml-1">
                         <input
                             type="color"
-                            value={typeof current.color === "string" && current.color.startsWith("#") ? current.color : "#a0a0a0"}
+                            
                             onChange={(e) => selectColor(e.target.value)}
                             className="w-11 h-11 rounded-full border border-gray-200 dark:border-gray-700 cursor-pointer p-0"
                             aria-label="pick custom color"
-                            
+                            style={{backgroundImage:"url('texture/custom.png"}}
                         />
-                      
+
                         <span className="text-xs text-gray-600 dark:text-gray-400">Custom</span>
                     </div>
                 </div>
@@ -228,21 +232,21 @@ const Sidebar: React.FC = observer(() => {
 
                 {"metalness" in current && (
                     <>
-                        <div className="text-xs text-gray-600 dark:text-gray-400 mb-2">Metallic</div>
+                        <div className="text-xs font-bold text-white  mb-5">Metallic</div>
                         <PointSlider value={Number(current.metalness ?? 0)} onChange={(v) => updateNumeric("metalness", v)} />
                     </>
                 )}
 
                 {"roughness" in current && (
                     <>
-                        <div className="text-xs text-gray-600 dark:text-gray-400 mb-2">Roughness</div>
+                        <div className="text-xs  font-bold text-white mb-5">Roughness</div>
                         <PointSlider value={Number(current.roughness ?? 0.5)} onChange={(v) => updateNumeric("roughness", v)} />
                     </>
                 )}
 
                 {"transparency" in current && (
                     <>
-                        <div className="text-xs text-gray-600 dark:text-gray-400 mb-2">Transparency</div>
+                        <div className="text-xs  font-bold text-white mb-5">Transparency</div>
                         <PointSlider value={Number(current.transparency ?? 0)} onChange={(v) => updateNumeric("transparency", v)} />
                     </>
                 )}

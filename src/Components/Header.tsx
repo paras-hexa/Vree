@@ -14,7 +14,7 @@ const Header = observer(() => {
       }}
     >
       {/* Logo */}
-    <div style={{ fontSize: "20px", fontWeight: "bold" }}>
+    <div style={{ fontSize: "23px", fontWeight: "bold" }}>
       <img src="./logo/logo.svg" alt="Logo" style={{ height: "40px" }} />
     </div>
 
@@ -32,7 +32,7 @@ const Header = observer(() => {
           color: store.theme === "Dark" ? "#fff" : "#000",
         }}
       >
-        {store.theme === "Dark" ? "🌙 Dark" : "☀️ Light"}
+        {store.theme === "Dark" ?<img src="./icons/moon.png"></img> :<img src="./icons/sun.png"></img>}
       </button>
     </header>
   );

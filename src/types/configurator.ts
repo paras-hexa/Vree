@@ -2,7 +2,7 @@ export type Part = 'frame' | 'lens' | 'temple';
 
 export interface FrameProps {
     color: string;
-    texture: string | null;
+    texture: string|null ;
     metalness: number;
     roughness: number;
     transparency: number;
